@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMC</title>    
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+     <main>
+        <div class="estrutura">
+            <h1>Cálculo do IMC</h1>
+            <h3>IMC = Peso / Altura²</h3>
+            <form name="imcForm" onsubmit="return obterImc()" method="post">
+                Peso:   <input type="text" id="peso" />
+                <br><br>
+                Altura: <input type="text" id="altura" />
+                <br><br>
+                <input type="submit" value="Calcular">
+            </form>
+            <div>
+                <p id="resultado"></p>
+            </div>
+        </div>    
+    </main>
+    <script>
+        function obterImc() {
+            let peso = document.getElementById("peso").value;
+            let altura = document.getElementById("altura").value.replace(",", ".");
+            let imc = peso / (altura * altura);
+
+            if(!isNaN(peso) && !isNaN(altura)){
+                if(imc < 18.5){
+                    document.getElementById("resultado").innerHTML = "IMC = " + imc + "<br/> Magreza,  imc é menor que 18,5 kg/m2";
+                }else if (imc >= 18.5 && imc <= 24.9){
+                    document.getElementById("resultado").innerHTML = "IMC = " + imc + "<br/> Normal,  imc está entre 18,5 e 24,9 kg/m2";
+                }else if (imc >= 25 && imc <= 30)
+                    document.getElementById("resultado").innerHTML = "IMC = " + imc + "<br/> Sobrepeso,  imc está entre 25 e 30 kg/m2";
+                else if (imc > 30){
+                    document.getElementById("resultado").innerHTML = "IMC = " + imc + "<br/> Obesidade,  imc é maior que 30 kg/m2";
+                }else{
+                    document.getElementById("resultado").innerHTML = " Digite números <b>válidos!</b>"; 
+                }
+            } else {
+                document.getElementById("resultado").innerHTML = " Digite apenas <b>números!</b>"; 
+            }
+            return false;
+        }
+    </script> 
+</body>
+</html>
